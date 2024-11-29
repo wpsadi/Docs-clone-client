@@ -1,5 +1,5 @@
 import { Navigate, Outlet } from "react-router-dom";
-import React from 'react'
+
 import { useAuthStore } from "@/store/authStore";
 import LoadingPage from "@/components/Loading";
 

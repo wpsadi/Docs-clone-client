@@ -52,7 +52,7 @@ const Header = (
 ) => (
   <header className="bg-white border-b border-gray-200 p-4 flex items-center justify-between sticky top-0 z-10">
     <div className="flex items-center space-x-4">
-      {/* @ts-expect-error */}
+     
       <SheetTrigger asChild>
         <Button variant="ghost" size="icon" className="lg:hidden">
           <Menu className="h-6 w-6" />
@@ -138,7 +138,8 @@ const MainContent = () => {
     socket.on("connect", () => {
       //  // console.log("connected");
     });
-    socket.on("message", (message) => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    socket.on("message", (_msg) => {
       // // console.log(message);
     });
     socket.emit("message", "hello");

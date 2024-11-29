@@ -26,7 +26,7 @@ function LoadDocData() {
           setData(data);
           setLoading(false);
         })
-        .catch((e) => {
+        .catch(() => {
           // // console.log(e);
           setLoading(false);
           setFailed(true);

@@ -15,8 +15,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useDocStore } from "@/store/docStore";
 import { useToast } from "@/hooks/use-toast";
-import { useSocketStore } from "@/store/socketStore";
+
 import Quill from "quill";
+import { useSocketStore } from "@/store/socketSTore";
 
 const intervalTime = 1000;
 const modules = {

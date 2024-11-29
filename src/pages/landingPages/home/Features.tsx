@@ -1,5 +1,5 @@
 import { Clock, Share2, Users } from 'lucide-react'
-import React from 'react'
+
 
 function Features() {
   return (

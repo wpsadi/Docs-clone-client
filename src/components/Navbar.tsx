@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import React, { useState } from 'react'
+import  { useState } from 'react'
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { FileText, Menu, } from "lucide-react"
 import { Button } from '@/components/ui/button'
