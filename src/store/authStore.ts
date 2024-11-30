@@ -25,7 +25,8 @@ export const useAuthStore = create<IAuthStore>()(
         const baseURL = String(process.env.VITE_API_ENPOINT);
         const url = `${baseURL.substring(1, baseURL.length - 1)}/auth/github`;
         // // console.log(url);
-        window.location.href = url;
+        window.open(url, "_blank");
+        
       },
       async reinstateSession() {
         try {
@@ -48,7 +49,7 @@ export const useAuthStore = create<IAuthStore>()(
               set({ accountId: "", isLoggedIn: false, accountLoading: false });
             });
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        } catch (err: any) {
+        } catch  {
           set({ accountId: "", isLoggedIn: false });
           // console.log(err?.message)
         }
