@@ -133,7 +133,7 @@ const MainContent = () => {
   // adding socket connection
   const [SOCKET, setSocket] = useState<Socket | null>(null);
   useEffect(() => {
-    const socket = io("http://localhost:3000");
+    const socket = io("https://docs-clone-server-5o9h.onrender.com");
     setSocket(socket);
     socket.on("connect", () => {
       //  // console.log("connected");
