@@ -9,7 +9,7 @@ interface IAuthStore {
   accountId: string;
   isLoggedIn: boolean | null;
   reinstateSession(): void;
-  logout(): void;
+  logout(): Promise<void>;
   initiateGitHubAuth(): void;
   setHydrated(): void;
 }
@@ -70,11 +70,15 @@ export const useAuthStore = create<IAuthStore>()(
           // console.log(err?.message)
         }
       },
-      logout() {
-        const baseURL = String(process.env.VITE_API_ENPOINT);
-        const url = `${baseURL.substring(1, baseURL.length - 1)}/auth/logout`;
+      async logout() {
+        // const baseURL = String(process.env.VITE_API_ENPOINT);
+        // const url = `${baseURL.substring(1, baseURL.length - 1)}/auth/logout`;
         // // console.log(url);
-        window.location.href = url;
+        await apiAxios.get("/auth/logout")
+        await get().reinstateSession();
+
+        await window.location.reload();
+        // set({ accountId: "", isLoggedIn: false });
       },
       setHydrated() {
         set({ hydrated: true });
