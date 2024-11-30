@@ -20,12 +20,12 @@ export const useSocketStore = create<ISocketStore>()(
       socket: null,
       createConnection(id,key) {
         // Keep the socket only in memory, not in local storage
-        const socket = io("http://localhost:3000");
+        const socket = io(String(process.env.VITE_API_ENPOINT));
 
         socket.on("connect", () => {
           // console.log("connected");
         });
-        socket.on("message", (message) => {
+        socket.on("message", () => {
           // console.log(message);
         });
 

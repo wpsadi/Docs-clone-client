@@ -33,13 +33,14 @@ export const useAuthStore = create<IAuthStore>()(
         }
 
         // Polling the new window to check if authentication is complete
-        const interval = setInterval(() => {
+        const interval = setInterval(async () => {
           if (authWindow.closed) {
             clearInterval(interval);
             // Authentication flow completed, reload or check authentication status
             console.log("Authentication flow finished.");
             // Call API to check if user is authenticated (cookie should now be set)
-            get().reinstateSession();
+            await get().reinstateSession();
+            await window.location.reload();
           }
         }, 1000);
       },
