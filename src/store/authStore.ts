@@ -16,7 +16,7 @@ interface IAuthStore {
 
 export const useAuthStore = create<IAuthStore>()(
   persist(
-    immer((set) => ({
+    immer((set,get) => ({
       hydrated: false,
       accountLoading: false,
       accountId: "",
@@ -25,8 +25,23 @@ export const useAuthStore = create<IAuthStore>()(
         const baseURL = String(process.env.VITE_API_ENPOINT);
         const url = `${baseURL.substring(1, baseURL.length - 1)}/auth/github`;
         // // console.log(url);
-        window.open(url, "_blank");
-        
+        const authWindow = window.open(url, "_blank", "width=500,height=700");
+
+        if (!authWindow) {
+          alert("Please allow popups for this website");
+          return;
+        }
+
+        // Polling the new window to check if authentication is complete
+        const interval = setInterval(() => {
+          if (authWindow.closed) {
+            clearInterval(interval);
+            // Authentication flow completed, reload or check authentication status
+            console.log("Authentication flow finished.");
+            // Call API to check if user is authenticated (cookie should now be set)
+            get().reinstateSession();
+          }
+        }, 1000);
       },
       async reinstateSession() {
         try {
@@ -49,7 +64,7 @@ export const useAuthStore = create<IAuthStore>()(
               set({ accountId: "", isLoggedIn: false, accountLoading: false });
             });
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        } catch  {
+        } catch {
           set({ accountId: "", isLoggedIn: false });
           // console.log(err?.message)
         }
